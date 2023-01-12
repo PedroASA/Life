@@ -1,0 +1,24 @@
+CC=gcc
+CFLAGS=--openmp
+MPICC=mpicc
+INFILE=./judge.in
+MAXCORES=4
+MAXCOMMS=4
+
+file-mpi-life-make: file-mpi-life.c
+	$(MPICC) -o file-mpi-life file-mpi-life.c
+
+mpi-life-make: mpi-life.c
+	$(MPICC) -o mpi-life mpi-life.c
+
+openmp-life-make: life.c
+	$(CC) -o life life.c $(CFLAGS)
+
+clean:
+	find . -type f -executable | xargs rm
+
+time-file-mpi-life: 
+	for i in {1..$(MAXCOMMS)}; do time  (mpirun -n $i ./file-mpi-life $(INFILE)) 2>> $(OUTFILE);done
+
+time-openmp-life: 
+	for i in {1, $(MAXCORES)}; do export OMP_NUM_THREADS=$i; time (./life.c < $(FILE)) 2>> $(OUTFILE);done
