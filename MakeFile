@@ -1,11 +1,11 @@
 CC=gcc
 CFLAGS=--openmp
 MPICC=mpicc
-INFILE=./InFiles/life.in
+INFILE=InFiles/life.in
 MAXCORES=4
 MAXCOMMS=4
-OUTFILE1=./OutFiles/file-mpi-life.txt
-OUTFILE2=./OutFiles/openmp-life.txt
+OUTFILE1=OutFiles/file-mpi-life-format.txt
+OUTFILE2=OutFiles/openmp-life-format.txt
 BIN=bin/
 EXEC1=$(BIN)file-mpi-life
 EXEC2=$(BIN)opemp-life
@@ -13,14 +13,11 @@ EXEC2=$(BIN)opemp-life
 $(BIN)file-mpi-life: file-mpi-life.c
 	$(MPICC) -o $(EXEC1) file-mpi-life.c
 
-$(BIN)mpi-life: mpi-life.c
-	$(MPICC) -o $(BIN)mpi-life mpi-life.c
-
 $(BIN)openmp-life: life.c
 	$(CC) -o $(EXEC2) life.c $(CFLAGS)
 
-clean:
-	find . -type f -executable | xargs rm
+# clean:
+# 	find . -type f -executable | xargs rm; rm $(OUTFILE1); rm $(OUTFILE2)
 
 .PHONY: time-file-mpi-life
 time-file-mpi-life: $(EXEC1)
@@ -29,4 +26,4 @@ time-file-mpi-life: $(EXEC1)
 
 .PHONY: time-openmp-life
 time-openmp-life: $(BIN)openmp-life
-	for i in {1, $(MAXCORES)}; do export OMP_NUM_THREADS=$i; time (./life.c < $(FILE)) 2>> $(OUTFILE2);done
+	./time-openmp.sh $(MAXCORES) $(EXEC2) $(INFILE) $(OUTFILE2)

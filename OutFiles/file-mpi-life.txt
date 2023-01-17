@@ -1,5 +1,8 @@
-
-[proxy:0:0@pedroasa-Aspire-Z1-751] HYDU_create_process (utils/launch/launch.c:74): execvp error on file ./InFiles/life.in (Permission denied)
-Command exited with non-zero status 255
-0.00user 0.00system 0:00.00elapsed 116%CPU (0avgtext+0avgdata 2860maxresident)k
-0inputs+8outputs (0major+382minor)pagefaults 0swaps
+436.90user 0.50system 7:18.66elapsed 99%CPU (0avgtext+0avgdata 58484maxresident)k
+40inputs+16480outputs (7major+36119minor)pagefaults 0swaps
+455.71user 7.55system 3:53.54elapsed 198%CPU (0avgtext+0avgdata 58876maxresident)k
+0inputs+16480outputs (7major+49676minor)pagefaults 0swaps
+491.53user 9.46system 2:50.07elapsed 294%CPU (0avgtext+0avgdata 58968maxresident)k
+0inputs+16480outputs (7major+59961minor)pagefaults 0swaps
+532.17user 11.73system 2:21.15elapsed 385%CPU (0avgtext+0avgdata 59032maxresident)k
+0inputs+16480outputs (7major+72018minor)pagefaults 0swaps
